@@ -1,0 +1,15 @@
+FROM alpine:latest
+MAINTAINER Guillaume Dupont <gdupont@student.42.fr>
+
+##ENVIRONNEMENT UPDATE & UPGRADE##
+RUN apk update
+
+
+##NGINX SETUP##
+RUN apk add nginx
+RUN rm -rf /etc/nginx/sites-enabled/*
+COPY nginx.conf /etc/nginx/sites-available/config
+
+EXPOSE 80 443
+
+ENTRYPOINT service mysql start && nginx -g 'daemon off;' 
