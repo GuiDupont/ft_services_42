@@ -12,45 +12,37 @@
 sudo apt-get update -y
 
 
-#We install minikube, using https://minikube.sigs.k8s.io/docs/start/#x86
-#we assume that we are on Linux.
 
-sudo apt-get install -y rpm
+# curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+# sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
-sudo apt-get install -y libc.so
+# curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+# sudo dpkg -i minikube_latest_amd64.deb
 
-
-
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-sudo install minikube-linux-amd64 /usr/local/bin/minikube
-
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
-sudo dpkg -i minikube_latest_amd64.deb
-
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
-sudo rpm -ivh minikube-latest.x86_64.rpm
+# curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
+# sudo rpm -ivh minikube-latest.x86_64.rpm
 
 
 
-kubectl delete --all secret
-env var CHANGE_MINIKUBE_NONE_USER=true
+# kubectl delete --all secret
+# env var CHANGE_MINIKUBE_NONE_USER=true
 
-
+# If want to launch minikube with --driver=none we must install conntrack
 if ! which conntrack &>/dev/null; then
 	sudo apt-get install -y conntrack
 fi
 
+# sudo service nginx stop
 
-sudo service nginx stop
+# sudo systemctl enable docker.service
 
-sudo systemctl enable docker.service
-sudo minikube start
-#sudo minikube start --driver=none
-# I took away --driver=none to see
-
+# Since we are on a VM we launch minikube with no driver selected
+echo "Launching minikube..."
+sudo minikube start --driver=none
 
 #LoadBalancer
 echo "Installing MetalLB..."
+
 
 
 kubectl get configmap kube-proxy -n kube-system -o yaml | \
