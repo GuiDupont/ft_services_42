@@ -1,0 +1,11 @@
+FROM alpine:3.13
+
+MAINTAINER Guillaume Dupont <gdupont@student.42.fr>
+
+##ENVIRONNEMENT UPDATE & UPGRADE##
+RUN apk update
+
+
+##NGINX SETUP##
+
+
