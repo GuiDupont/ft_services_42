@@ -8,9 +8,10 @@ RUN apk update
 
 ##NGINX SETUP##
 RUN apk add nginx
-RUN rm -rf /etc/nginx/sites-enabled/*
-COPY nginx.conf /etc/nginx/sites-available/config
+
+
+COPY nginx.conf /etc/nginx/conf.d/nginx.conf
 
 EXPOSE 80 443
 
-ENTRYPOINT service mysql start && nginx -g 'daemon off;' 
+ENTRYPOINT nginx -g 'daemon off;' 
