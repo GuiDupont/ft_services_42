@@ -9,16 +9,8 @@
 # if there are issues with permissions do the following command
 #sudo usermod -aG docker user42; newgrp docker
 
-# If we want to launch minikube with --driver=none we must install conntrack
-# if ! which conntrack &>/dev/null; then
-# 	sudo apt-get install -y conntrack
-# fi
-
 # We delete previous minikube 
 minikube delete
-
-# Stopping nginx is necessary to avoid potential future issues
-service nginx stop
 
 # sudo systemctl enable docker.service
 
@@ -37,8 +29,13 @@ kubectl create secret generic -n metallb-system memberlist --from-literal=secret
 kubectl apply -f srcs/Metallb/metallb_config.yaml
 
 
+#CREATING MY OWN IMAGES
+docker build -t my_nginx_img srcs/nginx
 
+
+#MAKING SURE THE DOCKER IMAGES ARE IN THE MINIKUBE ENVIRONMENT
+eval $(minikube docker-env)
 ##NGINX##
-# docker build -t nginx_image srcs/nginx
 
-# sudo kubectl apply -f srcs/nginx/nginx_deployment.yaml
+
+kubectl apply -f srcs/nginx/nginx_deployment.yaml
