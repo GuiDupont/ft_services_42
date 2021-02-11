@@ -39,6 +39,6 @@ docker build -t my_nginx_img srcs/nginx
 
 
 ##NGINX##
-
-
 kubectl apply -f srcs/nginx/nginx_deployment.yaml
+
+
