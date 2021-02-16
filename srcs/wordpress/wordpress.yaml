@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: wordpress-deployment
   labels:
-    app: nginx
+    app: wordpress
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: wordpress
   template:
     metadata:
       labels:
-        app: nginx
+        app: wordpress
     spec:
       containers:
-      - name: nginx
-        image: my_nginx
+      - name: wordpress
+        image: my_wordpress
         imagePullPolicy: Never
         # livenessProbe:
         #   exec:
@@ -35,13 +35,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: wordpress
   annotations:
     metallb.universe.tf/allow-shared-ip: shared
 spec:
   selector:
-    app: nginx
-  type: LoadBalancer
+    app: wordpess
+  type: 
   ports:
     - protocol: TCP
       name: http
