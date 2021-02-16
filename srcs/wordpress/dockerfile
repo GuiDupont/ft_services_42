@@ -1,5 +1,6 @@
 FROM alpine:3.13
 #https://wiki.alpinelinux.org/wiki/WordPress
+#https://wiki.alpinelinux.org/wiki/MariaDB
 MAINTAINER Guillaume Dupont <gdupont@student.42.fr>
 
 ##PACKAGE UPDATE##
@@ -14,7 +15,7 @@ COPY nginx.conf /etc/nginx/conf.d/nginx.conf
 RUN mkdir /run/nginx/
 
 ##PHP INSTALL##
-RUN apk add lighttpd php7-common php7-iconv php7-json php7-gd php7-curl \
+RUN apk add php7-common php7-iconv php7-json php7-gd php7-curl \
 php7-xml php7-mysqli php7-imap php7-cgi fcgi php7-pdo php7-pdo_mysql \ 
 php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext \
 php7-ldap php7-ctype php7-dom
@@ -24,10 +25,13 @@ RUN mkdir -p /usr/share/webapps/ ; cd /usr/share/webapps/
 RUN wget https://wordpress.org/wordpress-5.5.tar.gz
 RUN tar -xzvf wordpress-5.5.tar.gz ; rm wordpress-5.5.tar.gz
 RUN ln -s /usr/share/webapps/wordpress/ /var/www/localhost/htdocs/wordpress
+RUN chown -R nginx /usr/share/webapps/
 
 ## INSTALL MARIADB##
 
-RUN apk add mariadb-client mariadb
+RUN apk add mariadb-client mariadb mariadb-doc
+RUN mkdir /var/mysql ; mkdir /var/mysql/datadir ; chown -R mysql:mysql /var/mysql
+COPY srcs/wordpress/my.cnf /etc/my.cnf
 
 #SET UP SSL CERTIFICATES FILES
 RUN apk add openssl && openssl req -x509 -nodes -days 365 -subj \
