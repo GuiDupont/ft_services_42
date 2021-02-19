@@ -31,11 +31,11 @@ kubectl apply -f srcs/Metallb/metallb_config.yaml
 
 #CREATING MY OWN IMAGES
 docker build -t my_nginx srcs/nginx
-#docker build -t wordpress srcs/wordpress
+docker build -t my_wordpress srcs/wordpress
 
 ##NGINX##
-kubectl apply -f srcs/nginx/nginx_deployment.yaml
+kubectl apply -f srcs/nginx/nginx.yaml
 
 
 ##WORDPRESS##
-#kubectl apply -f srcs/nginx/wordpress.yaml
+kubectl apply -f srcs/wordpress/wordpress.yaml
