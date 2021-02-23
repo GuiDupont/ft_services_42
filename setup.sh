@@ -32,10 +32,13 @@ kubectl apply -f srcs/Metallb/metallb_config.yaml
 #CREATING MY OWN IMAGES
 docker build -t my_nginx srcs/nginx
 docker build -t my_wordpress srcs/wordpress
+docker build -t my_phpmyadmin srcs/phpmyadmin
 
 ##NGINX##
 kubectl apply -f srcs/nginx/nginx.yaml
 
-
 ##WORDPRESS##
 kubectl apply -f srcs/wordpress/wordpress.yaml
+
+##PHPMYADMIN##
+kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
