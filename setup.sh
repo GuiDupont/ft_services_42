@@ -1,12 +1,14 @@
 # if there are issues with permissions do the following command
 #sudo usermod -aG docker user42; newgrp docker
 
-# We delete previous minikube 
-minikube delete
-echo "Launching minikube..."
-minikube start --vm-driver=docker
 
-#MAKING SURE THE DOCKER IMAGES WE BE IN THE MINIKUBE ENVIRONMENT
+
+
+
+
+#minikube delete && minikube start --vm-driver=docker
+
+#MAKING SURE THE DOCKER IMAGES WILL BE IN THE MINIKUBE ENVIRONMENT
 eval $(minikube docker-env)
 
 ##LoadBalancer MetalLB##
