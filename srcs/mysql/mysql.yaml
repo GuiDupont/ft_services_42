@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: my_mysql
+        imagePullPolicy: Never
+        # livenessProbe:
+        #   exec:
+        #     command:
+        #     - /bin/sh
+        #     - -c
+        #     - rc-service nginx status
+        #   initialDelaySeconds: 10
+        #   periodSeconds: 10
+        ports:
+        - containerPort: 3306
+          name: db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  annotations:
+    metallb.universe.tf/allow-shared-ip: shared
+spec:
+  selector:
+    app: mysql
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      name: db
+      port: 3306

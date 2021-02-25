@@ -5,28 +5,14 @@ MAINTAINER Guillaume Dupont <gdupont@student.42.fr>
 ##ENVIRONNEMENT UPDATE & UPGRADE##
 RUN apk update
 
-##MYSQL INSTALL##
-RUN apk add mysql mysql-client
-
-
-RUN chown -R mysql:mysql /var/lib/mysql
-RUN /etc/init.d/mariadb setup
-RUN /etc/init.d/mariadb start
-
-mysql_install_db --user=mysql --datadir=/var/lib/mysql
-
-rc-service mariadb start
-
-mysqladmin -u root password toor
-
-#SET UP SSL CERTIFICATES FILES
-RUN apk add openssl && openssl req -x509 -nodes -days 365 -subj \
-"/C=FR/ST=NA/O=NA/CN=ft_services.com" -addext "subjectAltName=DNS:ft_services.com" \
--newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key \
--out /etc/ssl/certs/nginx-selfsigned.crt
-
 RUN apk add openrc
 RUN rc-status
 RUN touch /run/openrc/softlevel
 
-ENTRYPOINT sh
+##MYSQL INSTALL##
+RUN apk add mysql mysql-client
+
+COPY db_init.sh /db_init.sh
+
+
+ENTRYPOINT sh /db_init.sh

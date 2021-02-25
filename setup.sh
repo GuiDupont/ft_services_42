@@ -35,6 +35,7 @@ kubectl apply -f srcs/Metallb/metallb_config.yaml
 docker build -t my_nginx srcs/nginx
 docker build -t my_wordpress srcs/wordpress
 docker build -t my_phpmyadmin srcs/phpmyadmin
+docker build -t my_mysql srcs/mysql
 
 ##NGINX##
 kubectl apply -f srcs/nginx/nginx.yaml
@@ -44,3 +45,6 @@ kubectl apply -f srcs/wordpress/wordpress.yaml
 
 ##PHPMYADMIN##
 kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
+
+##MYSQL##
+kubectl apply -f srcs/mysql/mysql.yaml

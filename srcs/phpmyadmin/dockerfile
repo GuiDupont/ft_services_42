@@ -25,8 +25,8 @@ php7-pdo_sqlite php7-xmlreader php7-bz2 php7-pdo_dblib php7-gmp
 RUN wget http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.0.2-all-languages.tar.gz
 RUN tar zxvf phpMyAdmin-5.0.2-all-languages.tar.gz && rm phpMyAdmin-5.0.2-all-languages.tar.gz
 RUN mv phpMyAdmin-5.0.2-all-languages /var/www/localhost/htdocs/phpmyadmin
-RUN chmod -R 777 /var/www/localhost/htdocs/phpmyadmin
-
+RUN chmod -R 755 /var/www/localhost/htdocs/phpmyadmin
+COPY config.inc.php /var/www/localhost/htdocs/phpmyadmin/config.inc.php
 
 
 ##SET UP SSL CERTIFICATES FILES##
@@ -34,6 +34,9 @@ RUN apk add openssl && openssl req -x509 -nodes -days 365 -subj \
 "/C=FR/ST=NA/O=NA/CN=ft_services.com" -addext "subjectAltName=DNS:ft_services.com" \
 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key \
 -out /etc/ssl/certs/nginx-selfsigned.crt
+
+
+
 
 RUN apk add openrc
 RUN rc-status
