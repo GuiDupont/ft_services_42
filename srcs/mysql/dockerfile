@@ -11,9 +11,14 @@ RUN apk add openrc
 RUN rc-status
 RUN touch /run/openrc/softlevel
 
+
+
 ##MYSQL INSTALL##
 RUN apk add mysql mysql-client
-
+COPY mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 COPY db_init.sh /db_init.sh
+
+##WORDPRESS DATABASE DUMPING##
+COPY setup_wordpress.sql /setup_wordpress.sql
 
 ENTRYPOINT sh /db_init.sh

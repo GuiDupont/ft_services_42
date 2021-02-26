@@ -13,7 +13,7 @@ declare(strict_types=1);
  * This is needed for cookie based authentication to encrypt password in
  * cookie. Needs to be 32 chars long.
  */
-$cfg['blowfish_secret'] = 'dkfjskffksfjsklafjagdgggdgdd36svegtwbtw43t5b778nibvyw'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+$cfg['blowfish_secret'] = 'dkfjskffksfjsklafjagchfgchfxghdgggdgdd36s'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
 
 /**
  * Servers configuration
@@ -75,6 +75,9 @@ $cfg['Servers'][$i]['export_templates'] = 'pma__export_templates';
  */
 $cfg['UploadDir'] = '';
 $cfg['SaveDir'] = '';
+
+$cfg['TempDir'] = '/var/www/localhost/htdocs/phpmyadmin/tmp/';
+$cfg['PmaAbsoluteUri'] = './';
 
 /**
  * Whether to display icons or text or both icons and text in table row

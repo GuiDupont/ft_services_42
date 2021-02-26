@@ -27,6 +27,7 @@ RUN wget http://files.directadmin.com/services/all/phpMyAdmin/phpMyAdmin-5.0.2-a
 RUN tar zxvf phpMyAdmin-5.0.2-all-languages.tar.gz && rm phpMyAdmin-5.0.2-all-languages.tar.gz
 RUN mv phpMyAdmin-5.0.2-all-languages /var/www/localhost/htdocs/phpmyadmin
 RUN chmod -R 755 /var/www/localhost/htdocs/phpmyadmin
+RUN mkdir /var/www/localhost/htdocs/phpmyadmin/tmp/
 COPY config.inc.php /var/www/localhost/htdocs/phpmyadmin/config.inc.php
 
 
