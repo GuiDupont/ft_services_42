@@ -11,6 +11,8 @@
 #MAKING SURE THE DOCKER IMAGES WILL BE IN THE MINIKUBE ENVIRONMENT
 eval $(minikube docker-env)
 
+clear
+
 ##LoadBalancer MetalLB##
 echo "Installing MetalLB..."
 
@@ -48,3 +50,5 @@ kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
 
 ##MYSQL##
 kubectl apply -f srcs/mysql/mysql.yaml
+
+clear

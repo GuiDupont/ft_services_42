@@ -1,6 +1,8 @@
 FROM alpine:3.13
 
-MAINTAINER Guillaume Dupont <gdupont@student.42.fr>
+LABEL Guillaume Dupont <gdupont@student.42.fr>
+
+EXPOSE 3306
 
 ##ENVIRONNEMENT UPDATE & UPGRADE##
 RUN apk update
@@ -13,6 +15,5 @@ RUN touch /run/openrc/softlevel
 RUN apk add mysql mysql-client
 
 COPY db_init.sh /db_init.sh
-
 
 ENTRYPOINT sh /db_init.sh

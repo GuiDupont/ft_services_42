@@ -30,9 +30,9 @@ $cfg['Servers'][$i]['auth_type'] = 'cookie';
 $cfg['Servers'][$i]['host'] = 'mysql';
 $cfg['Servers'][$i]['port'] = '3306';
 $cfg['Servers'][$i]['compress'] = false;
-$cfg['Servers'][$i]['AllowNoPassword'] = false;
-$cfg['Servers'][$i]['user'] = 'gdupont';
-$cfg['Servers'][$i]['password'] = 'mdp';
+$cfg['Servers'][$i]['AllowNoPassword'] = true;
+//$cfg['Servers'][$i]['user'] = 'gdupont';
+//$cfg['Servers'][$i]['password'] = 'mdp';
 
 /**
  * phpMyAdmin configuration storage settings.
@@ -52,7 +52,7 @@ $cfg['Servers'][$i]['table_info'] = 'pma__table_info';
 $cfg['Servers'][$i]['table_coords'] = 'pma__table_coords';
 $cfg['Servers'][$i]['pdf_pages'] = 'pma__pdf_pages';
 $cfg['Servers'][$i]['column_info'] = 'pma__column_info';
-$cfg['Servers'][$i]['history'] = 'pma__history';dg
+$cfg['Servers'][$i]['history'] = 'pma__history';
 $cfg['Servers'][$i]['table_uiprefs'] = 'pma__table_uiprefs';
 $cfg['Servers'][$i]['tracking'] = 'pma__tracking';
 $cfg['Servers'][$i]['userconfig'] = 'pma__userconfig';

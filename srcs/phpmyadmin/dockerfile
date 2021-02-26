@@ -1,5 +1,6 @@
 FROM alpine:3.13
-MAINTAINER Guillaume Dupont <gdupont@student.42.fr>
+
+LABEL Guillaume Dupont <gdupont@student.42.fr>
 
 ##PACKAGE UPDATE##
 RUN apk update
