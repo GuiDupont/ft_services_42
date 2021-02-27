@@ -1,6 +1,6 @@
 FROM alpine:3.13
 
-MAINTAINER Guillaume Dupont <gdupont@student.42.fr>
+LABEL Guillaume Dupont <gdupont@student.42.fr>
 
 ##ENVIRONNEMENT UPDATE & UPGRADE##
 RUN apk update
@@ -25,6 +25,7 @@ RUN apk add openssl && openssl req -x509 -nodes -days 365 -subj \
 RUN apk add openrc
 RUN rc-status
 RUN touch /run/openrc/softlevel
+
 
 EXPOSE 80 443
 

@@ -1,0 +1,32 @@
+FROM alpine:3.13
+
+LABEL Guillaume Dupont <gdupont@student.42.fr>
+
+##ENVIRONNEMENT UPDATE & UPGRADE##
+RUN apk update
+
+#INSTALL OPENRC
+RUN apk add openrc
+RUN rc-status
+RUN touch /run/openrc/softlevel
+
+#INSTALL VSFTPF
+RUN apk add vsftpd
+RUN rc-update add vsftpd default
+COPY vsftpd.conf ./etc/vsftpd/vsftpd.conf
+
+RUN mkdir -p /etc/ssl/vsftpd
+RUN apk add openssl && openssl req -x509 -nodes -days 365 -subj \
+"/C=FR/ST=NA/O=NA/CN=ft_services.com" -addext "subjectAltName=DNS:ft_services.com" \
+-newkey rsa:2048 -keyout /etc/ssl/vsftpd/vsftpd-selfsigned.key \
+-out /etc/ssl/vsftpd/vsftpd-selfsigned.crt
+
+#RUN chown vsftpd /etc/ssl/certs/vsftpd-selfsigned.crt
+
+RUN echo -e "mdp_ftp\nmdp_ftp\n" | adduser gdupont
+RUN echo -e "Le server ftp fonctionne\n" > /home/gdupont/fichier_de_test.txt
+
+
+EXPOSE 21
+
+ENTRYPOINT rc-service vsftpd restart && sh
