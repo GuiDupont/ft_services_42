@@ -6,12 +6,13 @@
 
 
 
-#minikube delete && minikube start --vm-driver=docker
-
+#minikube delete
+#minikube start --vm-driver=docker
+clear
 #MAKING SURE THE DOCKER IMAGES WILL BE IN THE MINIKUBE ENVIRONMENT
 eval $(minikube docker-env)
 
-clear
+
 
 ##LoadBalancer MetalLB##
 echo "Installing MetalLB..."
@@ -38,6 +39,7 @@ docker build -t my_nginx srcs/nginx
 docker build -t my_wordpress srcs/wordpress
 docker build -t my_phpmyadmin srcs/phpmyadmin
 docker build -t my_mysql srcs/mysql
+docker build -t my_ftps srcs/ftps
 
 ##NGINX##
 kubectl apply -f srcs/nginx/nginx.yaml
@@ -51,4 +53,8 @@ kubectl apply -f srcs/phpmyadmin/phpmyadmin.yaml
 ##MYSQL##
 kubectl apply -f srcs/mysql/mysql.yaml
 
+##MYSQL##
+kubectl apply -f srcs/ftps/ftps.yaml
+
 clear
+minikube dashboard

@@ -15,4 +15,4 @@ mariadb wordpress < /setup_wordpress.sql
 rm /setup_wordpress.sql
 rm /db_init.sh && echo "MYSQL done"
 
-#tail -f /dev/null
+tail -f /dev/null
