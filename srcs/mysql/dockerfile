@@ -7,11 +7,10 @@ EXPOSE 3306
 ##ENVIRONNEMENT UPDATE & UPGRADE##
 RUN apk update
 
+##OPENRC INSTALL##
 RUN apk add openrc
 RUN rc-status
 RUN touch /run/openrc/softlevel
-
-
 
 ##MYSQL INSTALL##
 RUN apk add mysql mysql-client
