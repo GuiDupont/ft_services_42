@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-mysql
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 0.25Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,6 +26,10 @@ spec:
       labels:
         app: mysql
     spec:
+      volumes:
+      - name: pv-mysql
+        persistentVolumeClaim:
+          claimName: pvc-mysql
       containers:
       - name: mysql
         image: my_mysql
@@ -28,7 +44,9 @@ spec:
         #   periodSeconds: 10
         ports:
         - containerPort: 3306
-          name: db
+        volumeMounts:
+        - mountPath: "/var/lib/mysql"
+          name: pv-mysql
 ---
 apiVersion: v1
 kind: Service
@@ -40,5 +58,5 @@ spec:
   type: ClusterIP
   ports:
     - protocol: TCP
-      name: db
       port: 3306
+---
