@@ -1,0 +1,25 @@
+FROM alpine:3.13
+
+MAINTAINER ade-garr
+
+EXPOSE 3000
+
+RUN apk update
+RUN apk add grafana
+
+RUN apk add openrc
+
+RUN rc-status
+RUN touch /run/openrc/softlevel
+
+##Grafana needs a system logger
+RUN apk add syslog-ng
+
+
+#
+RUN sed -i '/^cfg:server.http_addr/d' etc/conf.d/grafana
+
+RUN rm /etc/grafana.ini
+COPY grafana.ini /etc/grafana.ini
+
+ENTRYPOINT rc-service grafana start && tail -f /dev/null

@@ -1,0 +1,23 @@
+FROM alpine:3.13
+
+LABEL Guillaume Dupont <gdupont@student.42.fr>
+
+##ENVIRONNEMENT UPDATE & UPGRADE##
+RUN apk update
+
+#INSTALL OPENRC
+RUN apk add openrc
+RUN rc-status
+RUN touch /run/openrc/softlevel
+
+#INSTALL INFLUXDB
+RUN apk add influxdb influxdb-openrc influxdb-doc
+COPY influxdb.conf /etc/influxdb.conf
+
+#INSTALL TELEGRAF
+RUN apk add telegraf
+COPY telegraf.conf /etc/telegraf.conf
+
+
+COPY init_influxdb.sh /tmp/init_influxdb.sh
+ENTRYPOINT sh /tmp/init_influxdb.sh

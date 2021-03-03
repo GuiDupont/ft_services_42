@@ -6,8 +6,8 @@
 
 
 
-#minikube delete
-#minikube start --vm-driver=docker
+minikube delete
+minikube start --vm-driver=docker
 clear
 #MAKING SURE THE DOCKER IMAGES WILL BE IN THE MINIKUBE ENVIRONMENT
 eval $(minikube docker-env)
@@ -40,6 +40,7 @@ docker build -t my_wordpress srcs/wordpress
 docker build -t my_phpmyadmin srcs/phpmyadmin
 docker build -t my_mysql srcs/mysql
 docker build -t my_ftps srcs/ftps
+docker build -t my_grafana srcs/grafana
 
 ##Persistent Volumes##
 mkdir /mnt/data
@@ -60,6 +61,8 @@ kubectl apply -f srcs/mysql/mysql.yaml
 ##FTPS##
 kubectl apply -f srcs/ftps/ftps.yaml
 
+##FTPS##
+kubectl apply -f srcs/grafana/grafana.yaml
 
 
 clear
