@@ -58,12 +58,11 @@ kubectl apply -f srcs/mysql/mysql.yaml
 ##FTPS##
 kubectl apply -f srcs/ftps/ftps.yaml
 
-##GRAFANA##
-kubectl apply -f srcs/grafana/grafana.yaml
-kubectl apply -f srcs/grafana/datasource.yaml
-
 ##INFLUXDB + TELEGRAF##
 kubectl apply -f srcs/influxdb/influxdb.yaml
+
+##GRAFANA##
+kubectl apply -f srcs/grafana/grafana.yaml
 
 clear
 minikube dashboard

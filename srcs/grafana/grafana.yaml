@@ -41,6 +41,6 @@ spec:
   type: LoadBalancer
   ports:
     - protocol: TCP
-      name: graf
+      name: grafana
       port: 3000
       

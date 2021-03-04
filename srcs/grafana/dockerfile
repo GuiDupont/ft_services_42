@@ -21,6 +21,6 @@ RUN sed -i '/^cfg:server.http_addr/d' etc/conf.d/grafana
 
 RUN rm /etc/grafana.ini
 COPY grafana.ini /etc/grafana.ini
-COPY srcs/datasource.yaml /var/lib/grafana/provisioning/datasources/
+COPY datasource.yaml /var/lib/grafana/provisioning/datasources/
 
 ENTRYPOINT rc-service grafana start && tail -f /dev/null
