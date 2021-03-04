@@ -2,10 +2,6 @@
 #sudo usermod -aG docker user42; newgrp docker
 
 
-
-
-
-
 minikube delete
 minikube start --vm-driver=docker
 clear
@@ -34,16 +30,17 @@ kubectl create secret generic -n metallb-system memberlist --from-literal=secret
 kubectl apply -f srcs/Metallb/metallb_config.yaml
 
 
-#CREATING MY OWN IMAGES
+#CREATING IMAGES
 docker build -t my_nginx srcs/nginx
 docker build -t my_wordpress srcs/wordpress
 docker build -t my_phpmyadmin srcs/phpmyadmin
 docker build -t my_mysql srcs/mysql
 docker build -t my_ftps srcs/ftps
 docker build -t my_grafana srcs/grafana
+docker build -t my_influxdb srcs/influxdb
 
 ##Persistent Volumes##
-mkdir /mnt/data
+mkdir /home/user42/kube_mysql/ /home/user42/kube_influxdb/ 
 kubectl apply -f srcs/PersistentVolume/PV.yaml
 
 ##NGINX##
@@ -61,9 +58,12 @@ kubectl apply -f srcs/mysql/mysql.yaml
 ##FTPS##
 kubectl apply -f srcs/ftps/ftps.yaml
 
-##FTPS##
+##GRAFANA##
 kubectl apply -f srcs/grafana/grafana.yaml
+kubectl apply -f srcs/grafana/datasource.yaml
 
+##INFLUXDB + TELEGRAF##
+kubectl apply -f srcs/influxdb/influxdb.yaml
 
 clear
 minikube dashboard
