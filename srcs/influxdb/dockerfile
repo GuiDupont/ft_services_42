@@ -5,6 +5,8 @@ LABEL Guillaume Dupont <gdupont@student.42.fr>
 ##ENVIRONNEMENT UPDATE & UPGRADE##
 RUN apk update
 
+EXPOSE 8086
+
 #INSTALL OPENRC
 RUN apk add openrc
 RUN rc-status
@@ -15,9 +17,9 @@ RUN apk add influxdb influxdb-openrc influxdb-doc
 COPY influxdb.conf /etc/influxdb.conf
 
 #INSTALL TELEGRAF
-RUN apk add telegraf
+RUN apk add telegraf telegraf-openrc
 COPY telegraf.conf /etc/telegraf.conf
 
 
 COPY init_influxdb.sh /tmp/init_influxdb.sh
-ENTRYPOINT sh /tmp/init_influxdb.sh
+ENTRYPOINT sh /tmp/init_influxdb.sh 

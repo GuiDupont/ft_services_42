@@ -34,14 +34,14 @@ spec:
       - name: mysql
         image: my_mysql
         imagePullPolicy: Never
-        # livenessProbe:
-        #   exec:
-        #     command:
-        #     - /bin/sh
-        #     - -c
-        #     - rc-service nginx status
-        #   initialDelaySeconds: 10
-        #   periodSeconds: 10
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - rc-service mariadb status && rc-service telegraf status
+          initialDelaySeconds: 10
+          periodSeconds: 10
         ports:
         - containerPort: 3306
         volumeMounts:

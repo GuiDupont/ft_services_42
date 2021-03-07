@@ -18,14 +18,14 @@ spec:
       - name: grafana
         image: my_grafana
         imagePullPolicy: Never
-        # livenessProbe:
-        #   exec:
-        #     command:
-        #     - /bin/sh
-        #     - -c
-        #     - rc-service nginx status
-        #   initialDelaySeconds: 10
-        #   periodSeconds: 10
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - rc-service grafana status && rc-service telegraf status
+          initialDelaySeconds: 10
+          periodSeconds: 10
         ports:
         - containerPort: 3000
 ---

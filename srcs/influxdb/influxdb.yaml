@@ -34,14 +34,14 @@ spec:
       - name: influx
         image: my_influxdb
         imagePullPolicy: Never
-        # livenessProbe:
-        #   exec:
-        #     command:
-        #     - /bin/sh
-        #     - -c
-        #     - rc-service nginx status
-        #   initialDelaySeconds: 10
-        #   periodSeconds: 10
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - rc-service influxdb status && rc-service telegraf status
+          initialDelaySeconds: 10
+          periodSeconds: 10
         ports:
         - containerPort: 8086
         volumeMounts:

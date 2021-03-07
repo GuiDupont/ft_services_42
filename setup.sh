@@ -13,31 +13,20 @@ eval $(minikube docker-env)
 ##LoadBalancer MetalLB##
 echo "Installing MetalLB..."
 
-# # see what changes would be made, returns nonzero returncode if different
-# kubectl get configmap kube-proxy -n kube-system -o yaml | \
-# sed -e "s/strictARP: false/strictARP: true/" | \
-# kubectl diff -f - -n kube-system
-
-# # actually apply the changes, returns nonzero returncode on errors only
-# kubectl get configmap kube-proxy -n kube-system -o yaml | \
-# sed -e "s/strictARP: false/strictARP: true/" | \
-# kubectl apply -f - -n kube-system
-
-
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 kubectl apply -f srcs/Metallb/metallb_config.yaml
 
 
-#CREATING IMAGES
+# CREATING IMAGES
 docker build -t my_nginx srcs/nginx
 docker build -t my_wordpress srcs/wordpress
 docker build -t my_phpmyadmin srcs/phpmyadmin
 docker build -t my_mysql srcs/mysql
 docker build -t my_ftps srcs/ftps
-docker build -t my_grafana srcs/grafana
 docker build -t my_influxdb srcs/influxdb
+docker build -t my_grafana srcs/grafana
 
 ##Persistent Volumes##
 mkdir /home/user42/kube_mysql/ /home/user42/kube_influxdb/ 
@@ -65,4 +54,4 @@ kubectl apply -f srcs/influxdb/influxdb.yaml
 kubectl apply -f srcs/grafana/grafana.yaml
 
 clear
-minikube dashboard
+#minikube dashboard

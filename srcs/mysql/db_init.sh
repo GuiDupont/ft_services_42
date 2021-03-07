@@ -15,4 +15,6 @@ mariadb wordpress < /setup_wordpress.sql
 rm /setup_wordpress.sql
 rm /db_init.sh && echo "MYSQL done"
 
+rc-service telegraf start
+
 tail -f /dev/null

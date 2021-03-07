@@ -26,7 +26,10 @@ RUN apk add openrc
 RUN rc-status
 RUN touch /run/openrc/softlevel
 
+#INSTALL TELEGRAF
+RUN apk add telegraf telegraf-openrc
+COPY telegraf.conf /etc/telegraf.conf
 
 EXPOSE 80 443
 
-ENTRYPOINT rc-service nginx start && tail -f /dev/null
+ENTRYPOINT rc-service nginx start && rc-service telegraf start && tail -f /dev/null

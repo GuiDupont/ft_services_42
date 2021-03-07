@@ -20,4 +20,8 @@ COPY db_init.sh /db_init.sh
 ##WORDPRESS DATABASE DUMPING##
 COPY setup_wordpress.sql /setup_wordpress.sql
 
+#INSTALL TELEGRAF
+RUN apk add telegraf
+COPY telegraf.conf /etc/telegraf.conf
+
 ENTRYPOINT sh /db_init.sh

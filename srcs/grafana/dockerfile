@@ -15,12 +15,19 @@ RUN touch /run/openrc/softlevel
 ##Grafana needs a system logger
 RUN apk add syslog-ng
 
-
-#
 RUN sed -i '/^cfg:server.http_addr/d' etc/conf.d/grafana
 
 RUN rm /etc/grafana.ini
 COPY grafana.ini /etc/grafana.ini
-COPY datasource.yaml /var/lib/grafana/provisioning/datasources/
 
-ENTRYPOINT rc-service grafana start && tail -f /dev/null
+COPY datasources.yaml /var/lib/grafana/provisioning/datasources/
+
+COPY dashboards.yaml /usr/share/grafana/conf/provisioning/dashboards/
+COPY dashboards /var/lib/grafana/dashboards/
+
+#INSTALL TELEGRAF
+RUN apk add telegraf telegraf-openrc
+COPY telegraf.conf /etc/telegraf.conf
+
+
+ENTRYPOINT rc-service grafana start && rc-service telegraf start && tail -f /dev/null
