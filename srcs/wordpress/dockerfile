@@ -38,7 +38,7 @@ RUN touch /run/openrc/softlevel
 #INSTALL TELEGRAF
 RUN apk add telegraf telegraf-openrc
 COPY telegraf.conf /etc/telegraf.conf
-
+RUN sed -i 's/hostname = ""/hostname = "wordpress"/g' /etc/telegraf.conf
 
 EXPOSE 5050
 

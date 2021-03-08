@@ -1,7 +1,5 @@
 FROM alpine:3.13
 
-MAINTAINER ade-garr
-
 EXPOSE 3000
 
 RUN apk update
@@ -22,12 +20,13 @@ COPY grafana.ini /etc/grafana.ini
 
 COPY datasources.yaml /var/lib/grafana/provisioning/datasources/
 
-COPY dashboards.yaml /usr/share/grafana/conf/provisioning/dashboards/
-COPY dashboards /var/lib/grafana/dashboards/
+COPY dashboards.yaml /var/lib/grafana/provisioning/dashboards
+COPY ./dashboards /var/lib/grafana/dashboards/
 
 #INSTALL TELEGRAF
 RUN apk add telegraf telegraf-openrc
 COPY telegraf.conf /etc/telegraf.conf
+RUN sed -i 's/hostname = ""/hostname = "grafana"/g' /etc/telegraf.conf
 
 
 ENTRYPOINT rc-service grafana start && rc-service telegraf start && tail -f /dev/null

@@ -19,7 +19,7 @@ COPY influxdb.conf /etc/influxdb.conf
 #INSTALL TELEGRAF
 RUN apk add telegraf telegraf-openrc
 COPY telegraf.conf /etc/telegraf.conf
-
+RUN sed -i 's/hostname = ""/hostname = "influxdb"/g' /etc/telegraf.conf
 
 COPY init_influxdb.sh /tmp/init_influxdb.sh
 ENTRYPOINT sh /tmp/init_influxdb.sh 

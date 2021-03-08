@@ -34,6 +34,7 @@ RUN echo "Le server ftp fonctionne" > /home/gdupont/test.txt
 #INSTALL TELEGRAF
 RUN apk add telegraf telegraf-openrc
 COPY telegraf.conf /etc/telegraf.conf
+RUN sed -i 's/hostname = ""/hostname = "ftps"/g' /etc/telegraf.conf
 
 EXPOSE 20 21 40000
 
