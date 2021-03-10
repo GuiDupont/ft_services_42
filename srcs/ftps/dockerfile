@@ -38,4 +38,4 @@ RUN sed -i 's/hostname = ""/hostname = "ftps"/g' /etc/telegraf.conf
 
 EXPOSE 20 21 40000
 
-ENTRYPOINT rc-service vsftpd restart && rc-service telegraf start && tail -f /dev/null
+ENTRYPOINT ["/bin/sh", "-c", "rc-service vsftpd restart && rc-service telegraf start && tail -f /dev/null"]

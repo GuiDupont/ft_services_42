@@ -33,4 +33,4 @@ RUN sed -i 's/hostname = ""/hostname = "nginx"/g' /etc/telegraf.conf
 
 EXPOSE 80 443
 
-ENTRYPOINT rc-service nginx start && rc-service telegraf start && tail -f /dev/null
+ENTRYPOINT ["/bin/sh", "-c", "rc-service nginx restart && rc-service telegraf start && tail -f /dev/null"]

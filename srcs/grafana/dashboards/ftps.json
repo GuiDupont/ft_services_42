@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
+  "id": 7,
   "links": [],
   "panels": [
     {
@@ -24,7 +24,6 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "influxdb",
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -41,7 +40,6 @@
       },
       "hiddenSeries": false,
       "id": 2,
-      "interval": "",
       "legend": {
         "avg": false,
         "current": false,
@@ -68,24 +66,23 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "CPU usage",
           "groupBy": [
             {
               "params": [
-                "5m"
+                "$__interval"
               ],
               "type": "time"
             },
             {
               "params": [
-                "0"
+                "null"
               ],
               "type": "fill"
             }
           ],
           "measurement": "cpu",
           "orderByTime": "ASC",
-          "policy": "autogen",
+          "policy": "default",
           "queryType": "randomWalk",
           "refId": "A",
           "resultFormat": "time_series",
@@ -107,7 +104,7 @@
             {
               "key": "host",
               "operator": "=",
-              "value": "grafana"
+              "value": "ftps"
             }
           ]
         }
@@ -116,7 +113,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "GRAFANA CPU USAGE",
+      "title": "FTPS - CPU",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -166,7 +163,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Grafana",
-  "uid": "OA7rFK8Gk",
+  "title": "FTPS",
+  "uid": "6Dup-AUGz",
   "version": 1
 }

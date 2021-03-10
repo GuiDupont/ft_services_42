@@ -20,8 +20,9 @@ COPY grafana.ini /etc/grafana.ini
 
 COPY datasources.yaml /var/lib/grafana/provisioning/datasources/
 
-COPY dashboards.yaml /usr/share/grafana/conf/provisioning/dashboards/
+COPY dashboards.yaml /var/lib/grafana/provisioning/dashboards/
 COPY ./dashboards /var/lib/grafana/dashboards/
+RUN mkdir /var/log/grafana && touch /var/log/grafana/grafana.log
 
 #INSTALL TELEGRAF
 RUN apk add telegraf telegraf-openrc

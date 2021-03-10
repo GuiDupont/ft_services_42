@@ -44,9 +44,9 @@ RUN touch /run/openrc/softlevel
 #INSTALL TELEGRAF
 RUN apk add telegraf telegraf-openrc
 COPY telegraf.conf /etc/telegraf.conf
-RUN sed -i 's/hostname = ""/hostname = "telegraf"/g' /etc/telegraf.conf
+RUN sed -i 's/hostname = ""/hostname = "phpmyadmin"/g' /etc/telegraf.conf
 
 
 EXPOSE 5000
 
-ENTRYPOINT rc-service nginx start && rc-service php-fpm7 start && rc-service telegraf start && tail -f /dev/null
+ENTRYPOINT ["/bin/sh", "-c", "rc-service nginx restart && rc-service telegraf start && rc-service php-fpm7 start && tail -f /dev/null"]
