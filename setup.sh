@@ -2,8 +2,8 @@
 #sudo usermod -aG docker user42; newgrp docker
 
 
-minikube delete
-minikube start --vm-driver=docker
+#minikube delete
+#minikube start --vm-driver=docker
 clear
 #MAKING SURE THE DOCKER IMAGES WILL BE IN THE MINIKUBE ENVIRONMENT
 eval $(minikube docker-env)

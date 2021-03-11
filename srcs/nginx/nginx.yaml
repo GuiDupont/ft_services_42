@@ -18,14 +18,14 @@ spec:
       - name: nginx
         image: my_nginx
         imagePullPolicy: Never
-        # livenessProbe:
-        #   exec:
-        #     command:
-        #     - /bin/sh
-        #     - -c
-        #     - rc-service nginx status
-        #   initialDelaySeconds: 10
-        #   periodSeconds: 10
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - /sbin/service nginx status && /sbin/service telegraf status
+          initialDelaySeconds: 10
+          periodSeconds: 10
         ports:
         - containerPort: 80
           name: http

@@ -30,4 +30,4 @@ COPY telegraf.conf /etc/telegraf.conf
 RUN sed -i 's/hostname = ""/hostname = "grafana"/g' /etc/telegraf.conf
 
 
-ENTRYPOINT  rc-service grafana start && rc-service telegraf start && tail -f /dev/null
+ENTRYPOINT  /sbin/service grafana start && /sbin/service telegraf start && tail -f /dev/null

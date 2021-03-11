@@ -23,7 +23,7 @@ spec:
             command:
             - /bin/sh
             - -c
-            - rc-service grafana status && rc-service telegraf status
+            - /sbin/service grafana status && /sbin/service telegraf status
           initialDelaySeconds: 10
           periodSeconds: 10
         ports:

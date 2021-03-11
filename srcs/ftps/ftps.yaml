@@ -23,7 +23,7 @@ spec:
             command:
             - /bin/sh
             - -c
-            - rc-service vsftpd status
+            - /sbin/service vsftpd status && /sbin/service telegraf status
           initialDelaySeconds: 10
           periodSeconds: 10
         ports:
