@@ -2,8 +2,8 @@
 #sudo usermod -aG docker user42; newgrp docker
 
 
-#minikube delete
-#minikube start --vm-driver=docker
+minikube delete
+minikube start --vm-driver=docker
 clear
 #MAKING SURE THE DOCKER IMAGES WILL BE IN THE MINIKUBE ENVIRONMENT
 eval $(minikube docker-env)
@@ -20,12 +20,12 @@ kubectl apply -f srcs/Metallb/metallb_config.yaml
 
 
 # CREATING IMAGES
-docker build -t my_nginx srcs/nginx
-docker build -t my_wordpress srcs/wordpress
-docker build -t my_phpmyadmin srcs/phpmyadmin
-docker build -t my_mysql srcs/mysql
-docker build -t my_ftps srcs/ftps
-docker build -t my_influxdb srcs/influxdb
+# docker build -t my_nginx srcs/nginx
+# docker build -t my_wordpress srcs/wordpress
+# docker build -t my_phpmyadmin srcs/phpmyadmin
+# docker build -t my_mysql srcs/mysql
+# docker build -t my_ftps srcs/ftps
+# docker build -t my_influxdb srcs/influxdb
 docker build -t my_grafana srcs/grafana
 
 ##Persistent Volumes##

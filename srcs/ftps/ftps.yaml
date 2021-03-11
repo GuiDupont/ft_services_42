@@ -23,7 +23,7 @@ spec:
             command:
             - /bin/sh
             - -c
-            - /sbin/service vsftpd status && /sbin/service telegraf status
+            - "! top -n 1 | grep  vsftp[d] | grep Z && ! top -n 1 | grep telegra[f] | grep Z"
           initialDelaySeconds: 10
           periodSeconds: 10
         ports:

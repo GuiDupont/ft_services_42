@@ -23,7 +23,7 @@ spec:
             command:
             - /bin/sh
             - -c
-            - rc-service nginx status && rc-service php-fpm7 status && rc-service telegraf status
+            - rc-service nginx status && ! top -n 1 | grep  php-fpm[7] | grep Z && ! top -n 1 | grep telegra[f] | grep Z
           initialDelaySeconds: 10
           periodSeconds: 10
         ports:

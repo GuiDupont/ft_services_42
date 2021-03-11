@@ -39,6 +39,7 @@ spec:
             command:
             - /bin/sh
             - -c
+            #- "! top -n 1 | grep  influxd[b] | grep Z && ! top -n 1 | grep telegra[f] | grep Z"
             - rc-service influxdb status && rc-service telegraf status
           initialDelaySeconds: 10
           periodSeconds: 10
