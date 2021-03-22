@@ -23,7 +23,7 @@ spec:
             command:
             - /bin/sh
             - -c
-            - "rc-service grafana status && && ! top -n 1 | grep telegra[f] | grep Z"
+            - "rc-service grafana status && ! top -n 1 | grep telegra[f] | grep Z"
           initialDelaySeconds: 10
           periodSeconds: 10
         ports:

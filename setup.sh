@@ -1,4 +1,4 @@
-# if there are issues with permissions do the following command
+# if there are issues with permissions, do the following command
 #sudo usermod -aG docker user42; newgrp docker
 
 minikube delete
@@ -50,4 +50,4 @@ kubectl apply -f srcs/influxdb/influxdb.yaml
 kubectl apply -f srcs/grafana/grafana.yaml
 
 clear
-#minikube dashboard
+minikube dashboard
