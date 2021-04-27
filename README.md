@@ -8,6 +8,7 @@ This project aims to setup a kubernetes cluster based on minikube and running th
 - MetalLB
 - Influxdb (using telegraf)
 - Grafana
+
 Except MetalLB, all are running on pods based on Alpine. When a pod crashes, its data are preseved and the pod is automatically relaunch, 
 thanks respectively to volume persistence and livenessprob Kubernetes features.
 
